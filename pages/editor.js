@@ -9,26 +9,15 @@ import TextEditor from '../components/TextEditor'
 import Head from 'next/head'
 import Dropdown from '@material-tailwind/react/Dropdown'
 import DropdownItem from '@material-tailwind/react/DropdownItem'
+import { useSession } from 'next-auth/react'
 import DropdownLink from '@material-tailwind/react/DropdownLink'
 import Link from 'next/link'
-import { Editor } from 'react-draft-wysiwyg'
 
 export default function EditorPage() {
+  const { data: session } = useSession()
   const router = useRouter()
   const [showModal, setShowModal] = useState(false)
   const [input, setInput] = useState('')
-  var elem = document.documentElement
-  function openFullscreen() {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen()
-    }
-  }
-
-  function closeFullScreen() {
-    if (document.exitFullscreen) {
-      document.exitFullscreen()
-    }
-  }
 
   const quit = () => {
     router.push('/')
@@ -37,9 +26,6 @@ export default function EditorPage() {
     router.push('/')
   }
 
-  const createInvLink = () => {
-    router.push('/editor')
-  }
   const modal = (
     <Modal size="sm" active={showModal} toggler={() => setShowModal(false)}>
       <ModalBody className="flex cursor-pointer">
@@ -122,20 +108,15 @@ export default function EditorPage() {
               className="option"
               iconOnly={false}
             >
-              <DropdownItem
-                color="lightBlue"
-                ripple="light"
-                onClick={openFullscreen}
-              >
+              <DropdownItem color="lightBlue" ripple="light">
                 Toggle Fullscreen
               </DropdownItem>
               <hr className="border-t border-dashed border-slate-400"></hr>
-              <DropdownItem
-                color="red"
-                ripple="light"
-                onClick={closeFullScreen}
-              >
+              <DropdownItem color="red" ripple="light">
                 Close fullscreen
+                <p className="scale-90 items-start justify-start text-xs text-gray-400">
+                  If dosent works then press esc
+                </p>
               </DropdownItem>
             </Dropdown>
             <p className="option">Insert</p>
@@ -158,7 +139,7 @@ export default function EditorPage() {
 
         <img
           className="ml-2 h-10 cursor-pointer rounded-full"
-          src="https://yt3.ggpht.com/vWhrLST40Di1kGkW-HJr7wxU5kdYIfTCcTIR8wCMlfJaFLHKo0u2FbzrvIiktVM0-afCVxFFow=s176-c-k-c0x00ffffff-no-rj"
+          src={session.user.image}
         />
       </header>
 

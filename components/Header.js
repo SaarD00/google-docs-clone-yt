@@ -1,8 +1,10 @@
 import React from 'react'
 import Button from '@material-tailwind/react/Button'
 import Icon from '@material-tailwind/react/Icon'
+import { useSession } from 'next-auth/react'
 
 export default function Header() {
+  const { data: session } = useSession()
   return (
     <header className="sticky top-0 z-50 flex items-center bg-white px-4 py-2 shadow-md">
       <Button
@@ -39,7 +41,7 @@ export default function Header() {
       <img
         loading="lazy"
         className="hover:border-sky-400transition-transform ml-2 h-12 w-12 cursor-pointer rounded-full border border-sky-600 duration-200 ease-out hover:scale-110 hover:border-4 sm:hidden md:inline-flex"
-        src="https://yt3.ggpht.com/vWhrLST40Di1kGkW-HJr7wxU5kdYIfTCcTIR8wCMlfJaFLHKo0u2FbzrvIiktVM0-afCVxFFow=s176-c-k-c0x00ffffff-no-rj"
+        src={session.user.image}
         alt=""
       />
     </header>

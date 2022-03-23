@@ -3,19 +3,22 @@ import Head from 'next/head'
 import Header from '../components/Header'
 import Button from '@material-tailwind/react/Button'
 import Icon from '@material-tailwind/react/Icon'
-import { useSession, signIn, signOut, getSession } from 'next-auth/react'
+import { useSession, getSession } from 'next-auth/react'
 import Login from '../components/Login'
 import Modal from '@material-tailwind/react/Modal'
 import ModalBody from '@material-tailwind/react/ModalBody'
 import ModalFooter from '@material-tailwind/react/ModalFooter'
 import { useState } from 'react'
+import Footer from '../components/Footer'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 export default function Home() {
   const router = useRouter()
+
   const [showModal, setShowModal] = useState(false)
   const [input, setInput] = useState('')
+
   const createDocument = () => {
     if (!input) return
     setInput(input)
@@ -23,6 +26,8 @@ export default function Home() {
     router.push('/editor')
   }
 
+  const { data: session } = useSession()
+  if (!session) return <Login />
   const modal = (
     <Modal size="sm" active={showModal} toggler={() => setShowModal(false)}>
       <ModalBody>
@@ -92,15 +97,16 @@ export default function Home() {
           Blank
         </p>
       </section>
-      <section className="bg-white px-10 md:px-0">
+      <section className="overflow-hidden bg-white px-10 md:px-0">
         <div className="mx-auto max-w-3xl py-8 text-sm text-gray-700">
           <div className="flex items-center justify-between pb-5">
             <h2 className="flex-grow font-medium">My document</h2>
             <p className="mr-12">Day created</p>
             <Icon name="folder" size="3xl" color="gray" />
           </div>
-          <div>
-          </div>
+        </div>
+        <div className="my-36 mx-5 cursor-pointer items-center overflow-hidden text-xs font-bold text-gray-500 hover:text-blue-400">
+          <Footer></Footer>
         </div>
       </section>
     </div>
