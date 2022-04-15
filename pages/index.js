@@ -26,8 +26,6 @@ export default function Home() {
     router.push('/editor')
   }
 
-  const { data: session } = useSession()
-  if (!session) return <Login />
   const modal = (
     <Modal size="sm" active={showModal} toggler={() => setShowModal(false)}>
       <ModalBody>
