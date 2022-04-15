@@ -14,7 +14,6 @@ import DropdownLink from '@material-tailwind/react/DropdownLink'
 import Link from 'next/link'
 
 export default function EditorPage() {
-  const { data: session } = useSession()
   const router = useRouter()
   const [showModal, setShowModal] = useState(false)
   const [input, setInput] = useState('')
@@ -139,7 +138,7 @@ export default function EditorPage() {
 
         <img
           className="ml-2 h-10 cursor-pointer rounded-full"
-          src={session.user.image}
+          src="https://www.gravatar.com/avatar/4eaa8aea3ab7c58082edc5eda9265900.jpg?size=240&d=https%3A%2F%2Fwww.artstation.com%2Fassets%2Fdefault_avatar.jpg"
         />
       </header>
 
