@@ -4,7 +4,6 @@ import Icon from '@material-tailwind/react/Icon'
 import { useSession } from 'next-auth/react'
 
 export default function Header() {
-  const { data: session } = useSession()
   return (
     <header className="sticky top-0 z-50 flex items-center bg-white px-4 py-2 shadow-md">
       <Button
@@ -41,7 +40,7 @@ export default function Header() {
       <img
         loading="lazy"
         className="hover:border-sky-400transition-transform ml-2 h-12 w-12 cursor-pointer rounded-full border border-sky-600 duration-200 ease-out hover:scale-110 hover:border-4 sm:hidden md:inline-flex"
-        src={session.user.image}
+        src="https://www.gravatar.com/avatar/4eaa8aea3ab7c58082edc5eda9265900.jpg?size=240&d=https%3A%2F%2Fwww.artstation.com%2Fassets%2Fdefault_avatar.jpg"
         alt=""
       />
     </header>
