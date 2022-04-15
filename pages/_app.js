@@ -12,7 +12,7 @@ export default function App({
 }) {
   return (
     <>
-      <SessionProvider session={session}>
+    
         <Head>
           <link
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -22,7 +22,7 @@ export default function App({
         <ThemeProvider>
           <Component {...pageProps} />
         </ThemeProvider>
-      </SessionProvider>
+
     </>
   )
 }
